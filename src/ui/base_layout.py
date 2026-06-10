@@ -6,14 +6,16 @@ def style_background_home():
 
     st.markdown("""
         <style>
-
+            *{
+                overflow: hidden !important;
+            }
                 .stApp {
                     background: #000080 !important;
                 }
 
                 .stApp div[data-testid="stColumn"]{
-                    background-color:#E0E3FF !important;
-                    padding:2.5rem !important;
+                    background-color:#000 !important;
+                    padding:2rem !important;
                     border-radius: 5rem !important;
                     }
         </style>  
@@ -54,7 +56,7 @@ def style_base_layout():
             }
                 
             .block-container {
-                padding-top:1.5rem !important;    
+                padding-top:1.2rem !important;    
             }
 
             h1 {
