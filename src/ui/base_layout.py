@@ -30,7 +30,32 @@ def style_background_dashboard():
         <style>
 
                 .stApp {
+                    background: #1a1a2e !important;
+                }
+
+        </style>  
+
+                """
+            ,unsafe_allow_html=True)
+
+
+def style_background_auth():
+
+    st.markdown("""
+        <style>
+
+                .stApp {
                     background: #ffcd0f !important;
+                }
+
+                .stApp h1, .stApp h2, .stApp h3, .stApp p, .stApp label, .stApp span {
+                    color: #E0E3FF !important;
+                }
+
+                .stTextInput input {
+                    background-color: #16213e !important;
+                    color: #E0E3FF !important;
+                    border: 1px solid #5865F2 !important;
                 }
 
         </style>  
