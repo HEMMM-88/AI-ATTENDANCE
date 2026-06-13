@@ -110,7 +110,9 @@ def student_screen():
     st.space()
     st.space()
     
-    show_registration = False
+    if 'show_registration' not in st.session_state:
+        st.session_state.show_registration = False
+
     photo_source = st.camera_input("Position your face in the center")
 
     if photo_source:
@@ -121,8 +123,10 @@ def student_screen():
 
             if num_faces == 0:
                 st.warning('Face not found!')
-            elif num_faces >1:
+                st.session_state.show_registration = False
+            elif num_faces > 1:
                 st.warning('Multiple faces found')
+                st.session_state.show_registration = False
             else:
                 if detected:
                     student_id = list(detected.keys())[0]
@@ -133,13 +137,15 @@ def student_screen():
                         st.session_state.is_logged_in = True
                         st.session_state.user_role = 'student'
                         st.session_state.student_data = student
-                        st.toast(f'Welcome Back {student['name']}')
+                        st.session_state.show_registration = False
+                        st.toast(f'Welcome Back {student["name"]}')
                         time.sleep(1)
                         st.rerun()
                 else:
                     st.info('Face not recognized! You might be a new student!')
-                    show_registration = True
-    if show_registration:
+                    st.session_state.show_registration = True
+
+    if st.session_state.show_registration:
         with st.container(border=True):
             st.header('Register new Profile')
             new_name = st.text_input("Enter your name", placeholder='E.g. Hamza Rizvi')
