@@ -38,7 +38,12 @@ def get_all_students():
     return response.data
 
 def create_student(new_name, face_embedding=None, voice_embedding=None):
-    data = {'name': new_name, 'face_embedding':face_embedding, "voice_embedding": voice_embedding}
+    import json
+    data = {
+        'name': new_name,
+        'face_embedding': json.dumps(face_embedding) if face_embedding is not None else None,
+        'voice_embedding': json.dumps(voice_embedding) if voice_embedding is not None else None
+    }
     response = supabase.table('students').insert(data).execute()
     return response.data
 

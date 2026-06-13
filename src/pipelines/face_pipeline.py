@@ -51,7 +51,10 @@ def get_trained_model():
     for student in student_db:
         embedding = student.get('face_embedding')
         if embedding:
-            X.append(np.array(embedding))
+            if isinstance(embedding, str):
+                import json
+                embedding = json.loads(embedding)
+            X.append(np.array(embedding, dtype=np.float64))
             y.append(student.get('student_id'))
 
     if len(X) ==0:
@@ -95,8 +98,7 @@ def predict_attendance(class_image_np):
         else:
             predicted_id = int(all_students[0])
 
-        student_embedding = X_train[y_train.index(predicted_id)]
-
+        student_embedding = np.array(X_train[y_train.index(predicted_id)], dtype=np.float64)
         best_match_score = np.linalg.norm(student_embedding - encoding)
 
         resemblance_threshold = 0.6

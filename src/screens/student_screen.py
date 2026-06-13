@@ -1,6 +1,6 @@
 import streamlit as st
 
-from src.ui.base_layout import style_background_dashboard, style_base_layout
+from src.ui.base_layout import style_background_dashboard, style_base_layout, style_background_auth
 
 from src.components.header import header_dashboard
 from src.components.footer import footer_dashboard
@@ -89,14 +89,14 @@ def student_dashboard():
 
 def student_screen():
 
-
-    style_background_dashboard()
-    style_base_layout()
-
-
     if "student_data" in st.session_state:
+        style_background_dashboard()
+        style_base_layout()
         student_dashboard()
         return
+
+    style_background_auth()
+    style_base_layout()
     
     c1, c2 = st.columns(2, vertical_alignment='center', gap='xxlarge')
     with c1:
